@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue.js</title>
+    <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+        <!-- this is the view, or model-->
+<!-- All the page that Vue will manage goes here -->
+        <h1>Hello Vue!</h1>
+
+<!-- use double curly braces; use the word in app script-->
+        <p>Original Message: {{ message }}</p>
+
+        <p>Added Exclamation Points: {{ messageWithExclamationPoints }}</p>
+
+        <p>This class is {{ thisClass }}</p>
+
+<!--add a directive, v-on. Add a method to the click -->
+        <button v-on:click="addExclamationPoint">Add !</button>
+
+<!--My turn: add a button to reset-->
+        <br>
+        <button v-on:click="clearButton">Clear</button>
+
+
+    </div>
+
+    <script>
+
+        let app = Vue.createApp({
+            // define a function called data; it returns the data
+            data() {
+                return {  // message is a reactive data property
+                    message: 'Hi',
+                //    add more data properties, separated by commas
+                //    use a colon instead of =
+                    thisClass: 'Web Programming',
+                    maxExclamationPoints: 10,
+                    exclamationPoints: 0
+
+                }
+            },
+            methods: {
+                addExclamationPoint() {
+                    if (this.exclamationPoints < this.maxExclamationPoints) {
+                    this.exclamationPoints++
+                    // this.message = this.message + '!'  removed after computed
+                    } else {
+                        alert('You have reach the maximum number!')
+                    }
+                },
+                clearButton() {
+                    // this.message = 'Hi'  not needed after computed
+                    this.exclamationPoints = 0
+                }
+            },
+        //    create a computed property based on data
+            computed: {
+                messageWithExclamationPoints() {
+                    let messageWithPoints = this.message
+                    for (let x = 0 ; x < this.exclamationPoints ; x++) {
+                        messageWithPoints = messageWithPoints + '!'
+                    }
+                    return messageWithPoints
+                }
+            }
+        })
+
+        // put data into div with id="app"
+        app.mount('#app')
+
+    </script>
+
+</body>
+</html>

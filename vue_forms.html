@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vue.js</title>
+  <script src="https://unpkg.com/vue@next"></script>
+</head>
+<body>
+
+    <div id="app">
+
+        <h1>Hello Vue Forms</h1>
+
+        <label for="name">Please enter your name: </label>
+        <input v-model="name" id="name">
+
+<!--add v-if directive; if string empty=falsy, if content=truthy    -->
+<!--      <p v-if="name.length > 2">  -->
+        <p v-if="name">
+          Your name is {{ name }}
+<!--          use v-on directive; click is type of event; method called 'clear'-->
+          <button v-on:click="clear">Clear Input</button>
+        </p>
+<!--   v-else must be in next element   -->
+        <p v-else>
+          Waiting for user input
+        </p>
+
+    </div>
+
+    <script>
+
+        let app = Vue.createApp({
+          data() {
+            return {
+              name: ''  //empty string
+            }
+          },
+          methods: {
+            clear() {
+              this.name = ''
+            }
+          }
+        })
+
+        app.mount('#app')
+
+    </script>
+
+</body>
+</html>
